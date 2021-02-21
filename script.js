@@ -1,3 +1,53 @@
+const html = document.querySelector("html")
+const checkbox = document.querySelector("input[name=theme]")
+
+const getStyle = (element, style) => 
+    window
+        .getComputedStyle(element)
+        .getPropertyValue(style)
+
+const initialColors = {
+    bg: getStyle(html, "--bg"),
+    bgWhite: getStyle(html, "--bg-white"),
+    colorHeadings: getStyle(html, "--color-headings"),
+    darkBlue: getStyle(html, "--dark-blue"),
+    green: getStyle(html, "--green"),
+    bgHeader: getStyle(html, "--bg-header"),
+    fontTable: getStyle(html, "--font-table"),
+    greenButton: getStyle(html, "--green-button"),
+    transButton: getStyle(html, "--trans-button"),
+    hover: getStyle(html, "--hover"),
+    fontForm: getStyle(html, "--font-form")
+}
+
+const darkMode = {
+    colorHeadings: "#2F3437",
+    bg: "#2F3437",
+    bgWhite: "#3F4447",
+    darkBlue: "#ffffff",
+    green: "#363f5f",
+    bgHeader: "#363f5f",
+    fontTable: "#ffffff",
+    greenButton: "#43517f",
+    transButton: "#ffffff",
+    hover: "#c4c4c4",
+    fontForm: "#ffffff"
+}
+
+const transformKey = key => 
+    "--" + key.replace(/([A-Z])/, "-$1").toLowerCase()
+
+
+const changeColors = (colors) => {
+    Object.keys(colors).map(key => 
+        html.style.setProperty(transformKey(key), colors[key]) 
+    )
+}
+
+checkbox.addEventListener("change", ({target}) => {
+    target.checked ? changeColors(darkMode) : changeColors(initialColors)
+})
+
 const Modal = {
   open() {
     //Abrir modal
@@ -133,6 +183,15 @@ const DOM = {
         document.getElementById('incomeDisplay').innerHTML = Utils.formatCurrency(Transaction.incomes());
         document.getElementById('expenseDisplay').innerHTML = Utils.formatCurrency(Transaction.expenses());
         document.getElementById('totalDisplay').innerHTML = Utils.formatCurrency(Transaction.total());
+
+        //Mudar background do total para vermelho caso o saldo seja negativo
+        let cardTotal = document.querySelector('.card.total')
+
+        if(document.getElementById('totalDisplay').innerHTML.includes("-")) {
+            cardTotal.style.background = '#e92929';
+        } else {
+            cardTotal.style.background = '#49aa26';
+        }
     },
 
     clearTransactions() {

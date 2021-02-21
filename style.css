@@ -1,9 +1,17 @@
 /*Global =========*/
 :root {
-    --dark-blue: #363f5f;
+    --bg: #f0f2f5;
+    --bg-white: #ffffff;
+    --bg-header: #2d4a22;
+    --dark-blue: #354581;
     --green: #49aa26;
-    --light-green: #3dd705;
+    --trans-button: #3dd705;
+    --hover: #49aa26;
+    --green-button: #3dd705;
     --red: #e92929;
+    --color-headings: #2F3437;
+    --font-table: #969cb3;
+    --font-form: #000000;
 }
 
 * {
@@ -17,7 +25,7 @@ html {
 }
 
 body {
-    background: #f0f2f5;
+    background: var(--bg);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -50,12 +58,12 @@ h2 {
 
 /*Links & Buttons =========*/
 a {
-    color: var(--light-green);
+    color: var(--trans-button);
     text-decoration: none;
 }
 
 a:hover {
-    color: var(--green);
+    color: var(--hover);
 }
 
 button {
@@ -73,7 +81,7 @@ button {
 }
 
 button:hover {
-    background: var(--light-green);
+    background: var(--green-button);
 }
 
 .button.new {
@@ -101,8 +109,8 @@ button:hover {
 
 /*Header =========*/
 header {
-    background: #2d4a22;
-    padding: 2rem 0 10rem;
+    background: var(--bg-header);
+    padding: 3rem 0 9rem;
     text-align: center;
 }
 
@@ -113,7 +121,7 @@ header {
 
 /*Balance =========*/
 #balance {
-    margin-top: -8rem;
+    margin-top: -6rem;
 }
 
 #balance h2 {
@@ -123,7 +131,7 @@ header {
 
 /*Cards =========*/
 .card {
-    background: #ffffff;
+    background: var(--bg-white);
     padding: 1.5rem 2rem;
     border-radius: 0.25rem;
 
@@ -168,7 +176,7 @@ header {
 #data-table {
     width: 100%;
     border-spacing: 0 0.5rem;
-    color: #969cb3;
+    color: var(--font-table);
 }
 
 table thead tr th:first-child, 
@@ -182,7 +190,7 @@ table tbody tr td:last-child {
 }
 
 table thead th {
-    background: #ffffff;
+    background: var(--bg-white);
     
     font-weight: normal;
     padding: 1rem 2rem;
@@ -199,7 +207,7 @@ table tbody tr:hover {
 }
 
 table tbody td {
-    background: #ffffff;
+    background: var(--bg-white);
     padding: 1rem 2rem;
 }
 
@@ -243,7 +251,7 @@ td.expense {
 }
 
 .modal {
-    background: #f0f2f5;
+    background: var(--bg);
     padding: 2.4rem;
 
     position: relative;
@@ -256,12 +264,16 @@ td.expense {
 }
 
 #form h2 {
+    /* color: var(--font-form); */
     margin-top: 0;
 }
 
 input {
+    background: var(--bg-white);
+    color: var(--font-form);
     border: none;
     border-radius: 0.2rem;
+    outline: none;
 
     padding: 0.8rem;
 
@@ -306,4 +318,57 @@ footer {
         grid-template-columns: repeat(3, 1fr);
         gap: 2rem;
     }
+}
+
+/*Botão Darkmode =========*/
+.toggle {
+    width: min(90vw, 800px);
+    display: block;
+    position: relative;
+    top: -4rem;
+    right: 0;
+    margin: auto;
+}
+
+.toggle input[type=checkbox]{
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.toggle label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 52px;
+    height: 27px;
+    background: #c4c4c4;
+    float: right;
+    border-radius: 100px;
+    position: relative;
+}
+
+.toggle label::after{
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 90px;
+    transition: 0.3s;
+}
+
+.toggle input:checked + label {
+    background-color: var(--color-headings);
+}
+
+.toggle input:checked + label::after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+    background-color: white;
+}
+
+.toggle label:active:after {
+    width: 45px;
 }
