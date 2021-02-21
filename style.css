@@ -203,6 +203,10 @@ table tbody td {
     padding: 1rem 2rem;
 }
 
+table tbody img {
+    cursor: pointer;
+}
+
 td.description {
     color: var(--dark-blue);
 }
